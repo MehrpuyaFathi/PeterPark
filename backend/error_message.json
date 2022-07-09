@@ -1,0 +1,18 @@
+{
+    "noplate": {
+        "message": "plate doesn't exist!",
+        "code": 400
+    },
+    "invalidplate":{
+        "message": "plate format based on Germany format is wrong!",
+        "code": 422
+    },
+    "invalidstart_date":{
+        "message": "start_date is not in right format!",
+        "code": 422
+    },
+    "invalidend_date":{
+        "message": "end_date is not in right format!",
+        "code": 422
+    }
+}
