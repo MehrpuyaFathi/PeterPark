@@ -1,0 +1,19 @@
+version: "2"
+services:
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=123456
+    container_name: database-postgres
+  backend:
+    build: .\backend
+    ports:
+      - "5000:5000"
+    container_name: backend-python
+  frontend:
+    build: .\frontend
+    ports:
+      - "3000:3000"
+    container_name: frontend-react
