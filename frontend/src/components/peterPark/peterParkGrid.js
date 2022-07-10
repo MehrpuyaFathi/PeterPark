@@ -132,6 +132,7 @@ class PeterParkGrid extends React.Component {
     like this. if it wasn't the right way for search based on owner mindest, 
     just let me know to change the way of searching.
     */
+   if (this.state.rows == undefined) return [];
    if (this.state.searchText.length >= 3) {
       return this.state.rows.filter(
         (x) => {
