@@ -5,17 +5,24 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import create_engine
-
+import os
 
 JSON_FORMAT = 'application/json'
-ERROR_MESSAGE_PATH = './backend/error_message.json'
-LOG_PATH = './backend/logs/log.txt'
-DATABASE_URI = "postgresql://postgres:123456@localhost/PeterPark"
+ERROR_MESSAGE_PATH = './error_message.json'
+DATABASE_URI = "postgresql://postgres:123456@{}:5432/PeterPark".format('database-postgres')
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
-logging.basicConfig(filename = LOG_PATH,level=logging.DEBUG)
+
+## If you want to store the LOGS , just please un comment bellow codes
+# LOG_PATH = "./backend/logs"
+# LOG_PATH_FILE = "log.txt"
+# if not os.path.exists(LOG_PATH):
+#     os.makedirs(LOG_PATH)
+#     f = open(f'{LOG_PATH}/{LOG_PATH_FILE}',"w+")
+#     f.close()
+#logging.basicConfig(filename = f'{LOG_PATH}/{LOG_PATH_FILE}',level=logging.DEBUG)
 
 # route
 @app.route("/plate",methods = ['GET', 'POST'])
@@ -71,7 +78,6 @@ class Plate(db.Model):
 class DB:
     def __init__(self):
         self.create_table_plate()
-        pass
     def create_table_plate(self):
         engine = create_engine(DATABASE_URI)
         db.metadata.create_all(engine,checkfirst=True)
